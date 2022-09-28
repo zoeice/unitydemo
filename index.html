@@ -24,7 +24,6 @@
       </div>
     </div>
     <script>
-      document.onmousedown = function() {window.focus();};
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
@@ -115,6 +114,36 @@
         });
       };
       document.body.appendChild(script);
+
+      //初始化页面禁用unity的键盘监听事件。
+        function hackWebGLKeyboard(str) {
+             RemoveEventClick( );
+        }
+          //给unity键盘添加监听事件
+        function AddEventClick(){
+             for (var i in JSEvents.eventHandlers) {
+                var event = JSEvents.eventHandlers[i];
+                if (event.eventTypeString == 'keydown' || event.eventTypeString == 'keypress' || event.eventTypeString == 'keyup') {
+                   window.addEventListener(event.eventTypeString, event.eventListenerFunc, event.useCapture);
+                }
+            }
+        }
+        //移除unity键盘监听事件
+        function RemoveEventClick( ){
+             for (var i in JSEvents.eventHandlers) {
+                var event = JSEvents.eventHandlers[i];
+                if (event.eventTypeString == 'keydown' || event.eventTypeString == 'keypress' || event.eventTypeString == 'keyup') {
+                  window.removeEventListener(event.eventTypeString, event.eventListenerFunc, event.useCapture);
+                }
+            }
+        }
+        //判断当前是否点击到了unity的画布
+     document.addEventListener('click', function(e) {
+        if (e.target.id == "canvas") {
+            AddEventClick();
+        } else {
+            RemoveEventClick();
+        }
     </script>
   </body>
 </html>
