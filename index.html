@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | first-person-demo</title>
+    <title>Unity WebGL Player | F1Demo</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
@@ -20,7 +20,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">first-person-demo</div>
+        <div id="unity-build-title">F1Demo</div>
       </div>
     </div>
     <script>
@@ -56,14 +56,14 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/first-person.loader.js";
+      var loaderUrl = buildUrl + "/f1demo.loader.js";
       var config = {
-        dataUrl: buildUrl + "/first-person.data.unityweb",
-        frameworkUrl: buildUrl + "/first-person.framework.js.unityweb",
-        codeUrl: buildUrl + "/first-person.wasm.unityweb",
+        dataUrl: buildUrl + "/f1demo.data.unityweb",
+        frameworkUrl: buildUrl + "/f1demo.framework.js.unityweb",
+        codeUrl: buildUrl + "/f1demo.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
-        productName: "first-person-demo",
+        productName: "F1Demo",
         productVersion: "0.1",
         showBanner: unityShowBanner,
       };
@@ -114,36 +114,6 @@
         });
       };
       document.body.appendChild(script);
-
-      //初始化页面禁用unity的键盘监听事件。
-        function hackWebGLKeyboard(str) {
-             RemoveEventClick( );
-        }
-          //给unity键盘添加监听事件
-        function AddEventClick(){
-             for (var i in JSEvents.eventHandlers) {
-                var event = JSEvents.eventHandlers[i];
-                if (event.eventTypeString == 'keydown' || event.eventTypeString == 'keypress' || event.eventTypeString == 'keyup') {
-                   window.addEventListener(event.eventTypeString, event.eventListenerFunc, event.useCapture);
-                }
-            }
-        }
-        //移除unity键盘监听事件
-        function RemoveEventClick( ){
-             for (var i in JSEvents.eventHandlers) {
-                var event = JSEvents.eventHandlers[i];
-                if (event.eventTypeString == 'keydown' || event.eventTypeString == 'keypress' || event.eventTypeString == 'keyup') {
-                  window.removeEventListener(event.eventTypeString, event.eventListenerFunc, event.useCapture);
-                }
-            }
-        }
-        //判断当前是否点击到了unity的画布
-     document.addEventListener('click', function(e) {
-        if (e.target.id == "canvas") {
-            AddEventClick();
-        } else {
-            RemoveEventClick();
-        }
     </script>
   </body>
 </html>
